@@ -1,9 +1,13 @@
 import React from 'react';
+import './ChatView.css'
+import ChatWindow from './Components/ChatWindow/ChatWindow';
 
 class ChatView extends React.Component {
   render() {
     return (
-      <h1>Hello World</h1>
+      <div className="chat-view">
+        <ChatWindow/>
+      </div>
     );
   }
 }

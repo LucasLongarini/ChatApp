@@ -1,0 +1,15 @@
+.chat-view {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    width: 960px;
+    height: 80%;
+    margin: auto;
+    background: rebeccapurple;
+}
+
+@media only screen and (max-width: 1000px) {
+    .chat-view {
+        width: 90%;
+    }
+    
+  }

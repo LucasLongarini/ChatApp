@@ -1,0 +1,21 @@
+.chat-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+::-webkit-scrollbar-track {
+    box-shadow: inset -1px -1px 6px 0 rgba(255, 255, 255, 0.6),
+                inset 3px 3px 6px 0 rgba(109, 117, 131, 0.2);
+    border-radius: 5px;
+}
+   
+::-webkit-scrollbar-thumb {
+    background-image: linear-gradient(to bottom right, rgba(212, 215, 219, 0.8), rgba(188, 191, 195, 0.8));
+    border-radius: 5px;
+}

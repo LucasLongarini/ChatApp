@@ -1,0 +1,14 @@
+.user-profile-container {
+   background: white;
+   margin-bottom: 15px;
+   padding: 10px;
+   border-radius: 100px;
+   display: flex;
+}
+
+.user-profile-container h3 {
+    margin: auto;
+    color: rgb(77, 77, 77);
+    font-size: 16px;
+    font-weight: 600;
+}

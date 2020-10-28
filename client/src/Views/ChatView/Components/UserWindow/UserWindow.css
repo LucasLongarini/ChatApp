@@ -1,0 +1,21 @@
+.user-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.user-container h1{
+    color: #656565;
+    font-size: 20px;
+    font-weight: 500;
+    margin: auto;
+    padding: 16px 0;
+}
+
+.user-list {
+    flex: 1;
+    margin: 0px 10px;
+    padding: 0px 20px 20px 20px;
+    overflow: auto;
+}

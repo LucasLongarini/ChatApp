@@ -8,7 +8,7 @@ const path = require('path');
 
 app.use(bodyParser.json());
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 app.use(express.static(path.join(__dirname, "../client/build")));
 
 app.get('/', (req, res) => {
@@ -17,23 +17,48 @@ app.get('/', (req, res) => {
 
 let onlineUsers = [];
 
+let messageLength = 200;
+let messageIndex = 0;
+let messages = [];
+
 io.on('connection', (socket) => {
-    socket.emit("login", socket.id);
-    onlineUsers.push(socket.id);
-    console.log(onlineUsers);
+    // console.log(socket.handshake.query.username);
+    let newUser = {username: `User${Date.now()}`, color: '#5F5F5F'};
+    onlineUsers.push(newUser);
+    socket.emit("login", {
+        user: newUser,
+        messages: messages,
+        users: onlineUsers
+    });
+
+    io.emit('new users', onlineUsers);
 
     socket.on('disconnect', _ => {
-        const index = onlineUsers.indexOf(socket.id);
-        if (index > -1) {
-            onlineUsers.splice(index, 1);
-        }
-        console.log(onlineUsers);
+        onlineUsers = onlineUsers.filter(e => {
+            return e.username != newUser.username;
+        });
+        io.emit('new users', onlineUsers);
     });
 
-    socket.on("new message", message => {
-
+    socket.on("send message", message => {
+        var newMessage = {
+            message: convertEmoji(message.message),
+            user: newUser,
+            time: new Date(),
+        }
+        messages[messageIndex % messageLength] = newMessage;
+        messageIndex++;
+        io.emit('new messages', messages);
     });
 });
+
+// converst ':)' ':(' ':o' to emojis
+function convertEmoji(message) {
+    message = message.replace(':)', "😁");
+    message = message.replace(':(', "🙁");
+    message = message.replace(':o', "😲");
+    return message;
+}
 
 //Errors 
 app.use((req, res, next) => {

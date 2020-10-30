@@ -7,15 +7,17 @@ class ChatMessage extends React.Component {
   render() {
     let isUser = this.props.message.isUser ? "user" : "";
     let message = this.props.message;
+
+    let date = new Date(message.time);
     return (
       <div className={`chat-message-container ${isUser}`}>
         <div className="avatar-container">
-            <Avatar/>
+            <Avatar color={message.user.color}/>
         </div>
         <div className={`chat-bubble shadow1 ${isUser}`}>
-            <h4 className="other">{message.username}</h4>
+            <h4 className="other">{message.user.username}</h4>
             <p>{message.message}</p>
-            <h6>{message.time}</h6>
+            <h6>{date.toLocaleTimeString()}</h6>
         </div>
       </div>
     );

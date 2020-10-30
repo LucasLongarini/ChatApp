@@ -13,7 +13,7 @@ class ChatWindow extends React.Component {
   }
 
   sendMessage() {
-    if (this.state.value != '') {
+    if (this.state.value !== '') {
       this.props.handleMessageSent(this.state.value);
       this.setState({value: ''});
     }
@@ -32,7 +32,7 @@ class ChatWindow extends React.Component {
   render() {
     return (
       <div className="container chat-container">
-        <p id="user-indication">You are <span>user1</span></p>
+        {this.props.user && <p id="user-indication">You are <span>{this.props.user.username}</span></p>}
         <ChatList messages={this.props.messages}/>
         <div className="inputs">
           <input id="input" className="neo-shadow-inner" placeholder="Type a message..." onKeyDown={this.onKeyDown} value={this.state.value} onChange={this.textChanged}></input>

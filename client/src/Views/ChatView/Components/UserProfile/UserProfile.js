@@ -6,8 +6,8 @@ class UserProfile extends React.Component {
   render() {
     return (
       <div className="user-profile-container shadow1">
-        <UserAvatar/>
-        <h3>User1</h3>
+        <UserAvatar color={this.props.user.color}/>
+        <h3>{`${this.props.user.username} ${this.props.user.isUser ? '(you)': ''}`}</h3>
       </div>
     );
   }

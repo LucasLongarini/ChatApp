@@ -68,44 +68,44 @@ io.on('connection', (socket) => {
                 updateUserColor(newUser.username, color)
             }
             else {
-                socket.emit('error', "Invalid Color");
+                socket.emit('error message', "Invalid Color");
             }
             re.lastIndex = 0;
         }
 
         else if (message.message.startsWith("/user ")) {
-            // let newUsername = message.message.replace("/user ", "");
+            let newUsername = message.message.replace("/user ", "");
             
-            // let existingUser = takenUsers.filter(user => user.username === newUsername);
-            // if (existingUser.length > 0) {
-            //     socket.emit('error', "Username is taken");
-            // }
+            let existingUsers = takenUsers.filter(user => user.username === newUsername);
+            if (existingUsers.length > 0) {
+                socket.emit('error message', "Username is taken");
+            }
 
-            // else{
-            //     let index = takenUsernames.indexOf(username);
-            //     if (index !== -1) {
-            //         let oldUsername = username;
-            //         takenUsernames[index] = newUsername;
-            //         username = newUsername;
-            //         newUser.username = newUsername;
-            //         socket.emit('new username', newUsername);
+            else {
+                let oldUsername = newUser.username;
+                takenUsers.forEach(user => {
+                    if (user.username === oldUsername) {
+                        user.username === newUsername;
+                        newUser.username = newUsername;
+                    }
+                });
+                socket.emit('new username', newUsername);
 
-            //         onlineUsers.forEach(user => {
-            //             if (user.username === oldUsername) {
-            //                 user.username = newUsername;
-            //             }
-            //         });
-            //         io.emit('new users', onlineUsers);
+                onlineUsers.forEach(user => {
+                    if (user.username === oldUsername) {
+                        user.username = newUsername;
+                    }
+                });
+                io.emit('new users', onlineUsers);
 
-            //         messages.forEach(message => {
-            //             if (message.user.username === oldUsername) {
-            //                 message.user.username = newUsername;
-            //             }
-            //         });
-            //         io.emit('new messages', messages);
-            //     }
+                messages.forEach(message => {
+                    if (message.user.username === oldUsername) {
+                        message.user.username = newUsername;
+                    }
+                });
+                io.emit('new messages', messages);
 
-            // }
+            }
 
         }
 

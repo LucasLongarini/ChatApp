@@ -37,7 +37,6 @@ class ChatView extends React.Component {
 
       if (data.newUsername) {
         cookie.set('username', data.user.username, {expires: 1000});
-        console.log('setting new username cookie', data.user.username);
       }
       
       this.setState({user: data.user});
@@ -60,7 +59,7 @@ class ChatView extends React.Component {
     this.socket.on('new username', username => {
       this.state.user.username = username;
       this.setState({user: this.state.user});
-      //update cookies
+      cookie.set('username', username, {expires: 1000});
     });
   }
 

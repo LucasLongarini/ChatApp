@@ -73,8 +73,8 @@ io.on('connection', (socket) => {
             re.lastIndex = 0;
         }
 
-        else if (message.message.startsWith("/user ")) {
-            let newUsername = message.message.replace("/user ", "");
+        else if (message.message.startsWith("/name ")) {
+            let newUsername = message.message.replace("/name ", "");
             
             let existingUsers = takenUsers.filter(user => user.username === newUsername);
             if (existingUsers.length > 0) {

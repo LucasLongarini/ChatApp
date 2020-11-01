@@ -68,7 +68,7 @@ io.on('connection', (socket) => {
                 updateUserColor(newUser.username, color)
             }
             else {
-                socket.emit('error message', "Invalid Color");
+                socket.emit('error message', "Error: Invalid color format");
             }
             re.lastIndex = 0;
         }
@@ -78,7 +78,7 @@ io.on('connection', (socket) => {
             
             let existingUsers = takenUsers.filter(user => user.username === newUsername);
             if (existingUsers.length > 0) {
-                socket.emit('error message', "Username is taken");
+                socket.emit('error message', `Error: Username \"${newUsername}\" is taken`);
             }
 
             else {
@@ -110,7 +110,7 @@ io.on('connection', (socket) => {
         }
 
         else if (message.message.startsWith("/")) {
-            socket.emit('error', "Invalid command");
+            socket.emit('error message', "Error: Invalid command");
         }
 
         else {

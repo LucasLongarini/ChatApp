@@ -4,17 +4,22 @@ import ChatWindow from './Components/ChatWindow/ChatWindow';
 import UserWindow from './Components/UserWindow/UserWindow';
 import io from 'socket.io-client';
 import cookie from 'js-cookie';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 class ChatView extends React.Component {
 
   socket;
   constructor(props) {
     super(props);
+    toast.configure();
     this.handleMessageSent = this.handleMessageSent.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleNewMessages = this.handleNewMessages.bind(this);
     this.handleNewUsers = this.handleNewUsers.bind(this);
     this.handleNewUsername = this.handleNewUsername.bind(this);
+    this.handleError = this.handleError.bind(this);
 
     this.state = {
       user: undefined,
@@ -27,6 +32,7 @@ class ChatView extends React.Component {
     // get cookies before (or web storage)
     this.socket = io();
     this.handleLogin();
+    this.handleError();
     this.handleNewUsers();
     this.handleNewMessages();
     this.handleNewUsername();
@@ -90,6 +96,12 @@ class ChatView extends React.Component {
     this.socket.emit('send message', {message: message, user:this.state.user});
   }
   
+  handleError() {
+    this.socket.on('error message', error => {
+      toast.error(error);
+    });
+  }
+
   render() {
     return (
       <div className="chat-view">

@@ -19,6 +19,6 @@ Instructions on how to run the code on linux machines:
     To do this do the following:
         1. Open a new terminal
         2. Run 'ssh -N -f -L localhost:10005:localhost:3000 <Your Cpsc Username>@linux.cpsc.ucalgary.ca'
-        3. Enter in your passowrd
+        3. Enter in your password
         4. On your local machine, go to 'localhost:10005'
     You should now see the website.
